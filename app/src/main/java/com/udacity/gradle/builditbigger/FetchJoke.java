@@ -16,6 +16,7 @@ import java.io.IOException;
 public class FetchJoke extends AsyncTask<Pair<Context, String>, Void, String> {
     private static final String LOCAL_IP = "http://10.0.2.2:8080/_ah/api/";
     private static MyApi myApiService = null;
+    public String joke = "";
     private Context context;
 
     @Override
@@ -28,14 +29,13 @@ public class FetchJoke extends AsyncTask<Pair<Context, String>, Void, String> {
         }
 
         context = params[0].first;
-        String stuff = params[0].second;
 
         try {
-            String joke = myApiService.sendJoke().execute().getData();
+            joke = myApiService.sendJoke().execute().getData();
             return joke;
         } catch (IOException e) {
             e.printStackTrace();
-            return e.getMessage();
+            return "";
         }
     }
 
